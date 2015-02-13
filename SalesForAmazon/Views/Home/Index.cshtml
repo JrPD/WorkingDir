@@ -1,0 +1,31 @@
+﻿@using BookParser
+@model IEnumerable<SalesForAmazon.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>*@
+
+
+<table style="padding-left: 25px; padding-top: 20px;">
+    <tr>
+        <th style="text-align: left; padding-bottom: 5px;">
+            @Html.DisplayName("Categories")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Name)*@
+                @Html.ActionLink(item.Name,"Index", new {id=item.Name.ParseURL()})
+            
+            </td>
+        </tr>
+    }
+
+</table>
+<footer></footer>
