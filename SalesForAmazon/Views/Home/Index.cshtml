@@ -1,33 +1,67 @@
-﻿@using BookParser
-@model Tuple<List<SalesForAmazon.Models.Category>, IEnumerable<SalesForAmazon.Models.Book>>
-
+﻿@model Tuple<List<SalesForAmazon.Models.Category>, PagedList.IPagedList < SalesForAmazon.Models.Book >>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @*<h2>Index</h2>*@
 
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="text-center">
+<div class="row">
+    <div class="col-md-3">
+        <div class="">
+
+            <div>
+                <div class="col-md-5">
+                    <h6> Item per page</h6>
+                </div>
+                <div class="col-md-7">
+                    @using (Html.BeginForm())
+                    {
+                        <div id="pro_pag2">
+                            @Html.DropDownList("PageSize", new SelectList(
+                            new Dictionary<string, int>
+                            {
+                                { "2",2 }, { "3",3 },   { "4",4 },  { "20", 20 },  { "40", 40 }, { "60", 60 }, { "80", 80 },{ "100", 100 }
+                            }, "Key", "Value"), new { id = "pagesizelist" })
+                        </div>
+                    }
+                </div>
+            </div>
+            <div>
                 @Html.DisplayName("Categories")
             </div>
+
+        </div>
             
-            <ul>
-                @foreach (var item in Model.Item1)
-                {
+        <ul>
+            @foreach (var item in Model.Item1)
+            {
                      @* @Html.DisplayFor(modelItem => item.Name)*@
-                    <li>
-                        @Html.ActionLink(item.Name, "Index", new { id = item.Name.ParseURL() })
-                    </li>
-                }
-            </ul>
-
-        </div>
-
-        <div class="col-md-9">
-           @Html.Partial("BooksList", Model.Item2);
-        </div>
+                <li>
+                    @Html.ActionLink(item.Name, "Index", new { id = item.UrlName })
+                </li>
+            }
+        </ul>
 
     </div>
+
+    <div class="col-md-9">
+        @Html.Partial("BooksList", Model.Item2);
+    </div>
+
+</div>
+    
+
+
+@section Scripts {
+   
+<script type="text/javascript">
+    $('#pagesizelist').on('change', function (event) {
+        var form = $(event.target).parents('form');
+
+        form.submit();
+    });
+</script>
+}

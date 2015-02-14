@@ -1,0 +1,14 @@
+2015-02-14 15:44:58.3908|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 15:47:53.9534|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:07:32.2674|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:08:19.7916|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:08:58.9242|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:10:28.6808|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:11:29.2438|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:12:00.5523|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:13:12.3065|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:16:05.9103|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:19:34.2277|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:20:19.0495|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:28:21.2067|INFO|SalesForAmazon.MvcApplication|Start
+2015-02-14 16:51:29.7959|INFO|SalesForAmazon.MvcApplication|Start
