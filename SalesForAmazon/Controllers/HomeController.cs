@@ -7,6 +7,7 @@ using BookParser;
 using FluentSharp.CoreLib;
 using SalesForAmazon.Models;
 using Category = SalesForAmazon.Models.Category;
+using PagedList;
 
 /********************************************************************/
 // todo треба зробити так, щоб по виборі певної категорії робився запит - парсер і потім відображало у BooksList
@@ -31,32 +32,36 @@ namespace SalesForAmazon.Controllers
         {
             categoryList = Category.DefaultUrls();
             // щоб визначати вибрану категорію по цьому значенню
-            // ато по айдішні у строці не дуже вигдядає
+            // ато по айдішці у строці не дуже вигдядає
             foreach (var item in categoryList)
             {
                 item.UrlName = Func.ParseURL(item.Name);
             }
         }
 
-        public ActionResult Index(string id)
+        public ActionResult Index(string id, int? page, int? PageSize)
         {
             // todo установка категорій. треба потім занести все в базу
-            //нафіга!?!?!? яякщо в базу то не треба парсити
-            //або як зараз я зробив
-            //або перестати гамнокодити і зробити динамічно
-            //хіба так хоче замовник 
-            InitializeList();
+            //нафіга!?!?!? яякщо в базу то не треба парсити         \\ взагалі-то навіть не треба
+            //або як зараз я зробив                                 \\ хотів зробити у базі таблицю categories
+            //або перестати гамнокодити і зробити динамічно         \\ а потім занести у базу
+            //хіба так хоче замовник                                \\ але категорії не змінюються, так що не треба
+            InitializeList();                                       
             // просто для демонстрації
-            IEnumerable<Book> books = from b in dbContext.Books
+            var books = from b in dbContext.Books
                                       select b;
+            books = books.OrderBy(n => n.Name);
+            var pageNumber = (page ?? 1);
+            var pageSize = (PageSize ?? 4);
+            var booksPaged = books.ToPagedList(pageNumber, pageSize);
 
             // треба передавати 2 моделі. 2-га для Partial
-            var tuple = new Tuple<List<Category>, IEnumerable<Book>>(categoryList, books);
+            var tuple = new Tuple<List<Category>, IPagedList<Book>>(categoryList, booksPaged);
             return View(tuple);
         }
 
 
-        public ActionResult ParseBooks(IQueryable<SalesForAmazon.Models.Book> books)
+        public ActionResult ParseBooks(IPagedList<Book> books)
         {
             return PartialView("BooksList", books);
         }

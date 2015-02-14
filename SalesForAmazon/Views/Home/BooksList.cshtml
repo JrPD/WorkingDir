@@ -1,8 +1,9 @@
 ﻿@using System.Drawing
-@model IEnumerable<SalesForAmazon.Models.Book>
+@using PagedList.Mvc
+@model PagedList.IPagedList<SalesForAmazon.Models.Book>
 
    
-<div style="padding-top: 30px;">
+<div class="row" style="padding-top: 30px;">
     @foreach (var item in Model)
     {
 
@@ -27,4 +28,11 @@
 
     }
 </div>
+<div >
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+</div>
+
+
 

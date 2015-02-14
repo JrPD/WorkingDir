@@ -13,8 +13,13 @@
 </head>
 <body>
     @RenderBody()
+    @Scripts.Render("~/bundles/jquery", "~/bundles/scripts")
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    
+    @section Scripts{
+        <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/jqueryval")"></script>
+    }
+    
+    @RenderSection("scripts",  required:false)
 </body>
 </html>
