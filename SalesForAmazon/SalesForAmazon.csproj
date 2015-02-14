@@ -147,7 +147,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="DAL\Functions.cs" />
     <Compile Include="DAL\MainWindow.xaml.cs" />
     <Compile Include="Global.asax.cs">
