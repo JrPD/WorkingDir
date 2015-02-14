@@ -20,12 +20,15 @@ using Category = SalesForAmazon.Models.Category;
 
 namespace SalesForAmazon.Controllers
 {
+    using System.Collections;
+    using System.Threading.Tasks;
+
     public class HomeController : Controller
     {
         //
         // GET: /Home/
         private List<Category> categoryList;
-        readonly BookInfoEntities dbContext = new BookInfoEntities();
+        //readonly BookInfoEntities dbContext = new BookInfoEntities();
 
         public void InitializeList()
         {
@@ -38,7 +41,8 @@ namespace SalesForAmazon.Controllers
             }
         }
 
-        public ActionResult Index(string id)
+        [HttpGet]
+        public async Task<ActionResult> Index(string id)
         {
             // todo установка категорій. треба потім занести все в базу
             //нафіга!?!?!? яякщо в базу то не треба парсити
@@ -47,16 +51,18 @@ namespace SalesForAmazon.Controllers
             //хіба так хоче замовник 
             InitializeList();
             // просто для демонстрації
-            IEnumerable<Book> books = from b in dbContext.Books
-                                      select b;
-
+            //IEnumerable<Book> books = from b in dbContext.Books
+            //                          select b;
+            var worker = new MainWindow();
+            var urlList = categoryList.Where(y => y.UrlName == id).Select(x => x.Url).toList();
+            var books = worker.AllWorker(await worker.LoadDataAsync(urlList)).Result;
             // треба передавати 2 моделі. 2-га для Partial
             var tuple = new Tuple<List<Category>, IEnumerable<Book>>(categoryList, books);
             return View(tuple);
         }
 
 
-        public ActionResult ParseBooks(IQueryable<SalesForAmazon.Models.Book> books)
+        public ActionResult ParseBooks(IQueryable<Book> books)
         {
             return PartialView("BooksList", books);
         }
