@@ -4,7 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookParser;
+using FluentSharp.CoreLib;
+using SalesForAmazon.Models;
 using Category = SalesForAmazon.Models.Category;
+
+/********************************************************************/
+// todo установити логгер. у мене не вийшло.
+// todo треба зробити так, щоб по виборі певної категорії робився запит - парсер і потім відображало у BooksList
+// todo при виборі книги(щолк на книгу чи на посилання Details) відкривалося нове вікно з детальною інфою
+// todo десь там повинен бути dropdownlist, що вказуватиме кількість книг на сторінці
+// todo зробити pagedlist для гортання сторінок
+
+/********************************************************************/
+
+
 
 namespace SalesForAmazon.Controllers
 {
@@ -13,6 +26,7 @@ namespace SalesForAmazon.Controllers
         //
         // GET: /Home/
         private List<Category> categoryList;
+        readonly BookInfoEntities dbContext = new BookInfoEntities();
 
         public void InitializeList()
         {
@@ -65,15 +79,21 @@ namespace SalesForAmazon.Controllers
 
         public ActionResult Index(string id)
         {
+            // todo установка категорій. треба потім занести все в базу
             InitializeList();
-            return View(categoryList);
+            // просто для демонстрації
+            IEnumerable<Book> books = from b in dbContext.Books
+                select b;
+
+            // треба передавати 2 моделі. 2-га для Partial
+            var tuple = new Tuple<List<Category>, IEnumerable<Book>>(categoryList, books);
+            return View(tuple);
         }
 
 
-        public ActionResult ParseBooks()
+        public ActionResult ParseBooks( IQueryable<SalesForAmazon.Models.Book> books)
         {
-
-            return View();
+            return PartialView("BooksList", books);
         }
     }
 }

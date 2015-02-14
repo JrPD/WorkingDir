@@ -1,0 +1,30 @@
+﻿@using System.Drawing
+@model IEnumerable<SalesForAmazon.Models.Book>
+
+   
+<div style="padding-top: 30px;">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3" style="padding: 10px 10px 20px ">
+            <div>
+                <img src="@item.Image" style=" height: 150px; align-content: center;" />
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.Name) <br />
+                @Html.DisplayFor(modelItem => item.Author)<br />
+                @Html.DisplayFor(modelItem => item.Comments)<br />
+                @Html.DisplayFor(modelItem => item.Price)<br />
+                @Html.DisplayFor(modelItem => item.BestSellersRank)<br />
+                @Html.DisplayFor(modelItem => item.Categories)<br />
+                @Html.DisplayFor(modelItem => item.PublicationDate)<br />
+
+                <div>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

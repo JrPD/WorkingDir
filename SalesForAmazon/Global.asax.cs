@@ -14,8 +14,10 @@ namespace SalesForAmazon
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         protected void Application_Start()
         {
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

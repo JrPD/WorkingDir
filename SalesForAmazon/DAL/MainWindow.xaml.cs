@@ -66,49 +66,16 @@ namespace BookParser
 
         private async void ParseBtn_Click()
         {
-
-            try
+            contentList = await LoadDataAsync(urlList);
+            if (contentList.Count!=0 & contentList!=null)
             {
-                if (urlList != null)
-                {
-                    //StatusLabel.Content = "Downloading content for pages";
-                    contentList = await LoadDataAsync(urlList);
-                    if (contentList.Count!=0 & contentList!=null)
-                    {
-                        AllWorker(contentList);
-                    }
-                }
-                else
-                {
-                    //StatusLabel.Content = "List not loaded";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                //MessageBox.Show("Неможливо загрузити список посилань!");
+                AllWorker(contentList);
             }
         }
 
         private void SaveBtn_Click()
         {
-            try
-            {
-                _dbContext.SaveChanges();
-                if (_dbContext.Books.Any())
-                {
-                    //StatusLabel.Content = "Changes has been saved to database";
-                }
-                else
-                {
-                    //StatusLabel.Content = "Error saving changes";
-                }
-            
-            }
-            catch (Exception)
-            {
-                //StatusLabel.Content = "Error saving changes";
-            }
-
+            _dbContext.SaveChanges();
         }
 
        
@@ -130,7 +97,6 @@ namespace BookParser
         {
             
             CurrentStepCompleted = false;
-            //progressBar.Value = 0.00;
 
             var pageCount = 20;
             // List of parsed books

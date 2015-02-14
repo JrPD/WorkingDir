@@ -1,5 +1,5 @@
 ﻿@using BookParser
-@model IEnumerable<SalesForAmazon.Models.Category>
+@model Tuple<List<SalesForAmazon.Models.Category>, IEnumerable<SalesForAmazon.Models.Book>>
 
 @{
     ViewBag.Title = "Index";
@@ -8,24 +8,26 @@
 @*<h2>Index</h2>*@
 
 
-<table style="padding-left: 25px; padding-top: 20px;">
-    <tr>
-        <th style="text-align: left; padding-bottom: 5px;">
-            @Html.DisplayName("Categories")
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @* @Html.DisplayFor(modelItem => item.Name)*@
-                @Html.ActionLink(item.Name,"Index", new {id=item.Name.ParseURL()})
+    <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+                @Html.DisplayName("Categories")
+            </div>
             
-            </td>
-        </tr>
-    }
+            <ul>
+                @foreach (var item in Model.Item1)
+                {
+                     @* @Html.DisplayFor(modelItem => item.Name)*@
+                    <li>
+                        @Html.ActionLink(item.Name, "Index", new { id = item.Name.ParseURL() })
+                    </li>
+                }
+            </ul>
 
-</table>
-<footer></footer>
+        </div>
+
+        <div class="col-md-9">
+           @Html.Partial("BooksList", Model.Item2);
+        </div>
+
+    </div>
