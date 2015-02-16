@@ -1196,7 +1196,7 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
         throw new Error("Pass a function that returns the value of the ko.computed");
 
     function addSubscriptionToDependency(subscribable) {
-        _subscriptionsToDependencies.push(subscribable.subscribe(evaluatePossiblyAsync));
+        _subscriptionsToDependencies.push(subscribable.subscribe(evaluatePossibly ));
     }
 
     function disposeAllSubscriptionsToDependencies() {
@@ -1206,7 +1206,7 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
         _subscriptionsToDependencies = [];
     }
 
-    function evaluatePossiblyAsync() {
+    function evaluatePossibly () {
         var throttleEvaluationTimeout = dependentObservable['throttleEvaluation'];
         if (throttleEvaluationTimeout && throttleEvaluationTimeout >= 0) {
             clearTimeout(evaluationTimeoutInstance);
@@ -2680,7 +2680,7 @@ ko.bindingHandlers['value'] = {
         }
 
         ko.utils.arrayForEach(eventsToCatch, function(eventName) {
-            // The syntax "after<eventname>" means "run the handler asynchronously after the event"
+            // The syntax "after<eventname>" means "run the handler  hronously after the event"
             // This is useful, for example, to catch "keydown" events after the browser has updated the control
             // (otherwise, ko.selectExtensions.readValue(this) will receive the control's value *before* the key event)
             var handler = valueUpdateHandler;
@@ -2709,8 +2709,8 @@ ko.bindingHandlers['value'] = {
             // Workaround for IE6 bug: It won't reliably apply values to SELECT nodes during the same execution thread
             // right after you've changed the set of OPTION nodes on it. So for that node type, we'll schedule a second thread
             // to apply the value as well.
-            var alsoApplyAsynchronously = valueIsSelectOption;
-            if (alsoApplyAsynchronously)
+            var alsoApply hronously = valueIsSelectOption;
+            if (alsoApply hronously)
                 setTimeout(applyValueAction, 0);
         }
 

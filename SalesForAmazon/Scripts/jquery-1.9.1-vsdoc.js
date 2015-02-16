@@ -323,7 +323,7 @@
     };
     jQuery.Deferred = function (func) {
         /// <summary>
-        ///     A constructor function that returns a chainable utility object with methods to register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function.
+        ///     A constructor function that returns a chainable utility object with methods to register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or  hronous function.
         /// </summary>
         /// <param name="func" type="Function">
         ///     A function that is called just before the constructor returns.
@@ -536,7 +536,7 @@
     jQuery.active = 0;
     jQuery.ajax = function (url, options) {
         /// <summary>
-        ///     Perform an asynchronous HTTP (Ajax) request.
+        ///     Perform an  hronous HTTP (Ajax) request.
         ///     &#10;1 - jQuery.ajax(url, settings) 
         ///     &#10;2 - jQuery.ajax(settings)
         /// </summary>
@@ -800,7 +800,7 @@
                 globalEventContext.trigger("ajaxSend", [jqXHR, s]);
             }
             // Timeout
-            if (s.async && s.timeout > 0) {
+            if (s.  && s.timeout > 0) {
                 timeoutTimer = setTimeout(function () {
                     jqXHR.abort("timeout");
                 }, s.timeout);
@@ -975,7 +975,7 @@
         "isLocal": false,
         "global": true,
         "processData": true,
-        "async": true,
+        " ": true,
         "contentType": 'application/x-www-form-urlencoded; charset=UTF-8',
         "accepts": {},
         "contents": {},
@@ -2351,7 +2351,7 @@
                 xml = tmp.parseFromString(data, "text/xml");
             } else { // IE
                 xml = new ActiveXObject("Microsoft.XMLDOM");
-                xml.async = "false";
+                xml.  = "false";
                 xml.loadXML(data);
             }
         } catch (e) {
@@ -2872,7 +2872,7 @@
     };
     jQuery.when = function (subordinate /* , ..., subordinateN */) {
         /// <summary>
-        ///     Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events.
+        ///     Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent  hronous events.
         /// </summary>
         /// <param name="subordinate/*" type="Deferred">
         ///     One or more Deferred objects, or plain JavaScript objects.
@@ -3789,7 +3789,7 @@
                                     url: node.src,
                                     type: "GET",
                                     dataType: "script",
-                                    async: false,
+                                     : false,
                                     global: false,
                                     "throws": true
                                 });

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookParser
 {
-    public class Category
-    {
-        public string Name;
-    }
+    //public class Category
+    //{
+    //    public string Name;
+    //}
 
     public static class Func
     {

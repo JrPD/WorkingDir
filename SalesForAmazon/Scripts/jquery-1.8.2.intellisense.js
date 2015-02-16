@@ -15,13 +15,13 @@
 intellisense.annotate(jQuery, {
   'ajax': function() {
     /// <signature>
-    ///   <summary>Perform an asynchronous HTTP (Ajax) request.</summary>
+    ///   <summary>Perform an  hronous HTTP (Ajax) request.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
     ///   <param name="settings" type="Object">A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup(). See jQuery.ajax( settings ) below for a complete list of all settings.</param>
     ///   <returns type="jqXHR" />
     /// </signature>
     /// <signature>
-    ///   <summary>Perform an asynchronous HTTP (Ajax) request.</summary>
+    ///   <summary>Perform an  hronous HTTP (Ajax) request.</summary>
     ///   <param name="settings" type="Object">A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup().</param>
     ///   <returns type="jqXHR" />
     /// </signature>
@@ -383,7 +383,7 @@ intellisense.annotate(jQuery, {
   },
   'when': function() {
     /// <signature>
-    ///   <summary>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events.</summary>
+    ///   <summary>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent  hronous events.</summary>
     ///   <param name="deferreds" type="Deferred">One or more Deferred objects, or plain JavaScript objects.</param>
     ///   <returns type="Promise" />
     /// </signature>

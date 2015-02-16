@@ -153,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\BooksDownloader.cs" />
     <Compile Include="DAL\Functions.cs" />
     <Compile Include="DAL\MainWindow.xaml.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,6 +183,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Add book.sql" />
     <Content Include="App_Data\BookInfo.mdf" />
     <Content Include="App_Data\BookInfo_log.ldf">
       <DependentUpon>BookInfo.mdf</DependentUpon>

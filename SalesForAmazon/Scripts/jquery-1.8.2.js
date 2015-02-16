@@ -552,7 +552,7 @@ jQuery.extend({
 				xml = tmp.parseFromString( data , "text/xml" );
 			} else { // IE
 				xml = new ActiveXObject( "Microsoft.XMLDOM" );
-				xml.async = "false";
+				xml.  = "false";
 				xml.loadXML( data );
 			}
 		} catch( e ) {
@@ -862,7 +862,7 @@ jQuery.ready.promise = function( obj ) {
 		// we once tried to use readyState "interactive" here, but it caused issues like the one
 		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
 		if ( document.readyState === "complete" ) {
-			// Handle it asynchronously to allow scripts the opportunity to delay ready
+			// Handle it  hronously to allow scripts the opportunity to delay ready
 			setTimeout( jQuery.ready, 1 );
 
 		// Standards-based browsers support DOMContentLoaded
@@ -2010,7 +2010,7 @@ var nodeHook, boolHook, fixSpecified,
 	rtype = /^(?:button|input)$/i,
 	rfocusable = /^(?:button|input|object|select|textarea)$/i,
 	rclickable = /^a(?:rea|)$/i,
-	rboolean = /^(?:autofocus|autoplay|async|checked|controls|defer|disabled|hidden|loop|multiple|open|readonly|required|scoped|selected)$/i,
+	rboolean = /^(?:autofocus|autoplay| |checked|controls|defer|disabled|hidden|loop|multiple|open|readonly|required|scoped|selected)$/i,
 	getSetAttribute = jQuery.support.getSetAttribute;
 
 jQuery.fn.extend({
@@ -6009,7 +6009,7 @@ jQuery.fn.extend({
 								url: elem.src,
 								type: "GET",
 								dataType: "script",
-								async: false,
+								 : false,
 								global: false,
 								"throws": true
 							});
@@ -7549,7 +7549,7 @@ jQuery.extend({
 		type: "GET",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		processData: true,
-		async: true,
+		 : true,
 		/*
 		timeout: 0,
 		data: null,
@@ -7971,7 +7971,7 @@ jQuery.extend({
 				globalEventContext.trigger( "ajaxSend", [ jqXHR, s ] );
 			}
 			// Timeout
-			if ( s.async && s.timeout > 0 ) {
+			if ( s.  && s.timeout > 0 ) {
 				timeoutTimer = setTimeout( function(){
 					jqXHR.abort( "timeout" );
 				}, s.timeout );
@@ -8283,7 +8283,7 @@ jQuery.ajaxTransport( "script", function(s) {
 
 				script = document.createElement( "script" );
 
-				script.async = "async";
+				script.  = " ";
 
 				if ( s.scriptCharset ) {
 					script.charset = s.scriptCharset;
@@ -8391,9 +8391,9 @@ if ( jQuery.support.ajax ) {
 					// Open the socket
 					// Passing null username, generates a login popup on Opera (#2865)
 					if ( s.username ) {
-						xhr.open( s.type, s.url, s.async, s.username, s.password );
+						xhr.open( s.type, s.url, s. , s.username, s.password );
 					} else {
-						xhr.open( s.type, s.url, s.async );
+						xhr.open( s.type, s.url, s.  );
 					}
 
 					// Apply custom fields if provided
@@ -8515,7 +8515,7 @@ if ( jQuery.support.ajax ) {
 						}
 					};
 
-					if ( !s.async ) {
+					if ( !s.  ) {
 						// if we're in sync mode we fire the callback
 						callback();
 					} else if ( xhr.readyState === 4 ) {

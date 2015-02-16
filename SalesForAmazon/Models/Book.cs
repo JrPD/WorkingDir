@@ -21,7 +21,10 @@ namespace SalesForAmazon.Models
         public Nullable<int> Comments { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<int> BestSellersRank { get; set; }
-        public string Categories { get; set; }
+        public Nullable<int> SubSubCategories { get; set; }
         public Nullable<System.DateTime> PublicationDate { get; set; }
+        public string Url { get; set; }
+    
+        public virtual Category Category { get; set; }
     }
 }

@@ -30,18 +30,17 @@ namespace SalesForAmazon.Controllers
         //
         // GET: /Home/
         private List<Category> categoryList;
-        readonly BookInfoEntities dbContext = new BookInfoEntities();
         private readonly NLog.Logger Log = MvcApplication.logger;
 
         public void InitializeList()
         {
-            categoryList = Category.DefaultUrls();
+            //categoryList = Category.DefaultUrls();
             // щоб визначати вибрану категорію по цьому значенню
             // ато по айдішці у строці не дуже вигдядає
-            foreach (var item in categoryList)
-            {
-                item.UrlName = Func.ParseURL(item.Name);
-            }
+            //foreach (var item in categoryList)
+            //{
+            //    item.UrlName = Func.ParseURL(item.Name);
+            //}
 
             ViewBag.dropdownCount = new SelectList(new Dictionary<string, int>
             {
@@ -59,8 +58,6 @@ namespace SalesForAmazon.Controllers
 
         public ActionResult Index(string id, int? page, int? PageSize)
         {
-
-
             if (ViewBag.count==null)
             {
                 ViewBag.count = 4;
@@ -69,29 +66,24 @@ namespace SalesForAmazon.Controllers
             Log.Info("Creating new project from {0} at {1}", (int)ViewBag.counts, page);
 
             // todo установка категорій. треба потім занести все в базу
-            //нафіга!?!?!? яякщо в базу то не треба парсити         \\ взагалі-то навіть не треба
-            //або як зараз я зробив                                 \\ хотів зробити у базі таблицю categories
-            //або перестати гамнокодити і зробити динамічно         \\ а потім занести у базу
-            //хіба так хоче замовник                                \\ але категорії не змінюються, так що не треба
             InitializeList();                                       
             // просто для демонстрації
-            var books = from b in 
-                            dbContext.Books.
-                            OrderBy(n => n.Name)
-                                      select b;
+            //var books = from b in
+            //                dbContext.Books.
+            //                OrderBy(n => n.Name)
+            //            select b;
             var pageNumber = (page ?? 1);
             Log.Info("Creating new project from {0} at {1}", (int)ViewBag.counts, page);
-          
+
             var pageSize = (PageSize ?? (int)ViewBag.counts);
-            var booksPaged = books.ToPagedList(pageNumber, pageSize);
+            //var booksPaged = books.ToPagedList(pageNumber, pageSize);
             //var worker = new MainWindow();
-            //var urlList = categoryList.Where(y => y.UrlName == id).Select(x => x.Url).toList();
-            //var books = worker.AllWorker(await worker.LoadDataAsync(urlList)).Result;
+                //var urlList = categoryList.Where(y => y.UrlName == id).Select(x => x.Url).toList();
+                //var books = worker.AllWorker(worker.LoadData (urlList));
             // треба передавати 2 моделі. 2-га для Partial
-            var tuple = new Tuple<List<Category>, IPagedList<Book>>(categoryList, booksPaged);
+            var tuple = new Tuple<List<Category>, IPagedList<Book>>(categoryList, null);
             return View(tuple);
         }
-
 
         public ActionResult ParseBooks(IPagedList<Book> books)
         {

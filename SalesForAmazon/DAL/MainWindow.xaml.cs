@@ -38,7 +38,7 @@ namespace BookParser
             _dbContext = new BookInfoEntities();
         }
 
-        public async Task<IEnumerable<Book>> AllWorker(List<string> contentList)
+        public IEnumerable<Book> AllWorker(List<string> contentList)
         {
             var books = new List<Book>();
             var bookUrls = new List<string>();
@@ -49,20 +49,20 @@ namespace BookParser
             contentList.Clear();
             foreach (var bookUrl in bookUrls)
             {
-                string urlContents = await GetURLContentsAsync(bookUrl);
+                string urlContents = GetURLContents (bookUrl);
                 contentList.Add(urlContents);
             }
             foreach (var content in contentList)
             {
-                books.Add(await Parse(content));
+                books.Add(Parse(content));
             }
             return books;
         }
 
-        private async Task<string> GetURLContentsAsync(string url)
+        private string GetURLContents (string url)
         {
             var webReq = (HttpWebRequest)WebRequest.Create(url);
-            using (WebResponse response = await webReq.GetResponseAsync())
+            using (WebResponse response = webReq.GetResponse ())
             {
                 using (var sr = new StreamReader(response.GetResponseStream()))
                 {
@@ -72,7 +72,7 @@ namespace BookParser
             }
         }
 
-        public async Task<Book> Parse(string content)
+        public Book Parse(string content)
         {
             lock (this)
             {
@@ -162,12 +162,12 @@ namespace BookParser
                                                Name = _Name,
                                                Author = _Author,
                                                BestSellersRank = _BestSellersRank,
-                                               Categories = _Categories,
+                                               //Categories = _Categories,
                                                Comments = _Comments,
                                                Price = _Price,
                                                PublicationDate = _PublicationDate
                                            };
-                            // return book async
+                            // return book  
                             return book;
                         }
                     }
@@ -203,30 +203,30 @@ namespace BookParser
             return new List<string>();
         }
 
-        public async Task<List<string>> LoadDataAsync(IEnumerable<string> urlList)
+        public List<string> LoadData (IEnumerable<string> urlList)
         {
             var contentList = new List<string>();
             try
             {
                 foreach (var url in urlList)
                 {
-                    var urlContents = await GetURLContentsAsync(url);
+                    var urlContents =  GetURLContents (url);
                     contentList.Add(urlContents);
                     urlContents = string.Empty;
 
-                    urlContents = await GetURLContentsAsync(url + "#2");
+                    urlContents =  GetURLContents (url + "#2");
                     contentList.Add(urlContents);
                     urlContents = string.Empty;
 
-                    urlContents = await GetURLContentsAsync(url + "#3");
+                    urlContents =  GetURLContents (url + "#3");
                     contentList.Add(urlContents);
                     urlContents = string.Empty;
 
-                    urlContents = await GetURLContentsAsync(url + "#4");
+                    urlContents =  GetURLContents (url + "#4");
                     contentList.Add(urlContents);
                     urlContents = string.Empty;
 
-                    urlContents = await GetURLContentsAsync(url + "#5");
+                    urlContents =  GetURLContents (url + "#5");
                     contentList.Add(urlContents);
                     urlContents = string.Empty;
                 }

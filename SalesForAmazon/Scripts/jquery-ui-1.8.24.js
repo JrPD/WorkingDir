@@ -6053,8 +6053,8 @@ $.widget( "ui.autocomplete", {
 						self.element.focus();
 						self.previous = previous;
 						// #6109 - IE triggers two focus events and the second
-						// is asynchronous, so we need to reset the previous
-						// term synchronously and asynchronously :-(
+						// is  hronous, so we need to reset the previous
+						// term synchronously and  hronously :-(
 						setTimeout(function() {
 							self.previous = previous;
 							self.selectedItem = item;
